@@ -6,6 +6,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
+  //templateUrl: './login/login.component.html',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
