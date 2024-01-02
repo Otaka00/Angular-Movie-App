@@ -14,7 +14,6 @@ export class MovieApiService {
   apikey = "08cc33bd5ae3a747598ce2ad84376e66";
 
   //bannerapidata
-
   bannerApiData(): Observable<any> {
     return this.http.get(`${this.baseurl}/trending/all/week?api_key=${this.apikey}`);
   }

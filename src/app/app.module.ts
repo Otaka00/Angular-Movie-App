@@ -1,24 +1,31 @@
-//Add ngmodel for forms
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component'; // Import the AppComponent
-import { LoginComponent } from './login/login.component'; // Import the LoginComponent
+import { LoginComponent } from './Components/login/login.component'; // Import the LoginComponent
+import { CatalogComponent } from './Components/catalog/catalog.component'; // Import the CatalogComponent
+
+import { AppRoutingModule } from './app.routes';
+import { MovieApiService } from './Services/movie-api.service';
 
 @NgModule({
   declarations: [
-    // your components here
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    CatalogComponent
   ],
   imports: [
-    // other modules
-    CommonModule
     BrowserModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  bootstrap: [AppComponent],
+  providers: [MovieApiService],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
