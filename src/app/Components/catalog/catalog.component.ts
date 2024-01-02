@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
+import { MovieApiService } from '../../Services/movie-api.service';
 import { Title,Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-catalog',
+  standalone: true,
+
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent implements OnInit {
 
-  constructor(private service: MovieApiServiceService,private title:Title,private meta:Meta) {
+  constructor(private service: MovieApiService, private title:Title, private meta:Meta) {
     this.title.setTitle('Home - showtime');
     this.meta.updateTag({name:'description',content:'watch online movies'});
-
    }
 
   bannerResult: any = [];
