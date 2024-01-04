@@ -1,1 +1,1 @@
-# Angular-Movies-App
+# Angular-Movie-App
