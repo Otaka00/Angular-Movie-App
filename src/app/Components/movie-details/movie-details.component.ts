@@ -10,9 +10,10 @@ import { Title, Meta } from '@angular/platform-browser';
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css'
 })
-export class MovieDetailsComponent {
+export class MovieDetailsComponent implements OnInit {
 
-  constructor(private service:MovieApiService, private router:ActivatedRoute, private title:Title,private meta:Meta) { }
+  constructor(private service:MovieApiService, private router:ActivatedRoute, private title:Title, private meta:Meta) { }
+
   getMovieDetailResult:any;
   getMovieVideoResult:any;
   getMovieCastResult:any;

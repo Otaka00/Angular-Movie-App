@@ -1,23 +1,26 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import { LoginComponent } from './Components/login/login.component';
 import { CatalogComponent } from './Components/catalog/catalog.component';
+import { MovieDetailsComponent } from './Components/movie-details/movie-details.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // imports: [CommonModule, RouterOutlet, LoginComponent],
+  imports: [CommonModule, RouterOutlet, LoginComponent, CatalogComponent, MovieDetailsComponent],
   // templateUrl: './Components/login/login.component.html',
-  templateUrl: './Components/catalog/catalog.component.html',
-  //templateUrl: './app.component.html',
+  //templateUrl: './Components/catalog/catalog.component.html',
+  templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
     name = 'Ahmad';
-    constructor(private router: Router) {}
+    //constructor(private router: Router) {}
+    constructor(private http: HttpClient) {}
 //     email = 'ahmad@ossama.com'
 //     password='125555'
 //     Adding login component

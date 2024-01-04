@@ -1,6 +1,6 @@
 import { Component, OnInit, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MovieApiService } from '../../Services/movie-api.service';
-import { Title,Meta } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-catalog',
