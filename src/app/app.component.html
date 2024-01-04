@@ -1,34 +1,18 @@
-<!--<div>-->
-
-<!--  <form>-->
-<!--      <label for="email">Email: </label>-->
-<!--      <input type="email" id="email" required />-->
-<!--      <div *ngIf="invalidEmailFormat">Invalid email format</div>-->
-<!--      <br>-->
-<!--      <label for="password">Password: </label>-->
-<!--      <input type="password" id="password" required />-->
-<!--      <br>-->
-<!--      <button type="submit">Sign in</button>-->
-<!--    </form>-->
-
-
-<!--  </div>-->
-
 <!-- navbar start  -->
-
 <nav class="navbar navbar-expand-lg fixed-top" [ngStyle]="navbg">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="">SHOWTIME</a>
+    <a class="navbar-brand" routerLink="" style="font-size: 40px">IMDB</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="">Home</a>
+          <a *ngIf="!isLoginRoute" class="nav-link active" aria-current="page" routerLink="" style="font-size: 30px">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="search">Search</a>
+          <!--          <a *ngIf="isLoginRoute" class="nav-link" routerLink= "login" style="font-size: 30px">Login</a>-->
+          <a *ngIf="!isLoginRoute" class="nav-link" routerLink = "login" style="font-size: 30px">Logout</a>
         </li>
       </ul>
     </div>

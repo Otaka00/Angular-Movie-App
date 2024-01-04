@@ -1,57 +1,38 @@
-import { Component, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-
-import { LoginComponent } from './Components/login/login.component';
-import { CatalogComponent } from './Components/catalog/catalog.component';
-import { MovieDetailsComponent } from './Components/movie-details/movie-details.component';
-import { FormsModule } from '@angular/forms';
+import { Component,HostListener } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, LoginComponent, CatalogComponent, MovieDetailsComponent],
-  // templateUrl: './Components/login/login.component.html',
-  //templateUrl: './Components/catalog/catalog.component.html',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    name = 'Ahmad';
-    //constructor(private router: Router) {}
-    constructor(private http: HttpClient) {}
-//     email = 'ahmad@ossama.com'
-//     password='125555'
-//     Adding login component
-//     email: string = '';
-//     password: string = '';
-//     invalidEmailFormat: boolean = false;
-//
-//
-//     login() {
-//       // Add logic to check user credentials (hardcoded for now)
-//       if (this.email.includes('@') && this.email.includes('.')) {
-//         // Successful login
-//         this.router.navigate(['/catalog']);
-//       } else {
-//         // Invalid email format
-//         this.invalidEmailFormat = true;
-//       }
-//     }
-  title = 'showtime';
+  title = 'IMDB';
   navbg:any;
+
+    isLoginRoute: boolean = false;
+    constructor(private router: Router) {
+      // Subscribe to router events to detect route changes
+      this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          // Update isLoginRoute based on the current route
+          this.isLoginRoute = event.url.includes('login') || event.url.includes('register');
+        }
+      });
+    }
   @HostListener('document:scroll') scrollover(){
     console.log(document.body.scrollTop,'scrolllength#');
 
     if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0)
     {
       this.navbg = {
-        'background-color':'#000000'
+        'background-color':'#ffff00'
       }
     }else
     {
-        this.navbg = {}
+        this.navbg = {
+             'background-color':'#ffff00'
+}
     }
-  }
+   }
 }

@@ -1,29 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieApiService } from '../../Services/movie-api.service';
+import { MovieApiServiceService } from 'src/app/Services/movie-api.service';
 import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-movie-details',
-  standalone: true,
-  imports: [],
   templateUrl: './movie-details.component.html',
-  styleUrl: './movie-details.component.css'
+  styleUrls: ['./movie-details.component.css']
 })
 export class MovieDetailsComponent implements OnInit {
 
-  constructor(private service:MovieApiService, private router:ActivatedRoute, private title:Title, private meta:Meta) { }
+  constructor(private service:MovieApiServiceService,
+  private router:ActivatedRoute,
+  private title:Title,
+  private meta:Meta)
+  { }
 
   getMovieDetailResult:any;
   getMovieVideoResult:any;
   getMovieCastResult:any;
+
   ngOnInit(): void {
-    let getParamId = this.router.snapshot.paramMap.get('id');
+    //let getParamId = this.router.snapshot.paramMap.get('id');
+    this.router.paramMap.subscribe((params) => {
+      let getParamId = params.get('id');
     console.log(getParamId,'getparamid#');
 
     this.getMovie(getParamId);
     this.getVideo(getParamId);
     this.getMovieCast(getParamId);
+});
   }
 
   getMovie(id:any){
@@ -36,7 +42,6 @@ export class MovieDetailsComponent implements OnInit {
         this.meta.updateTag({name:'title',content:this.getMovieDetailResult.original_title});
         this.meta.updateTag({name:'description',content:this.getMovieDetailResult.overview});
 
-        // facebook
         this.meta.updateTag({property:'og:type',content:"website"});
         this.meta.updateTag({property:'og:url',content:``});
         this.meta.updateTag({property:'og:title',content:this.getMovieDetailResult.original_title});

@@ -36,7 +36,8 @@
     transition: transform 450ms;
     margin-right: 7px;
 }
-
+h5{
+color: #ffffff;}
 .rowimg:hover
 {
     transform: scale(1.09);

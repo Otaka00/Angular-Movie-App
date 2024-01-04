@@ -1,63 +1,53 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
+  registerForm!: FormGroup;
 
-  signedUsers: any[] = [];
-  signUpObj: any = {
-    username: '',
-    email: '',
-    password: ''
-  }
- loginObj: any = {
-    email: '',
-    password: ''
-  }
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder,  private userService: UserService) { }
 
-  ngOnInit(): void{
-    const localData = localStorage.getItem('signUpUsers');
-    if(localData != null)
-      this.signedUsers= JSON.parse(localData);
+  ngOnInit(): void {
+    this.initLoginForm();
   }
-  onLogin(){
-  debugger
-  const isUserAvailable = this.signedUsers.find(u => u.email == this.loginObj.email && u.password == this.loginObj.password);
-  if(isUserAvailable != undefined)
-    alert("User login sucessfully");
-  else alert("Incorrect email or password. Please Try again!");
+
+  initLoginForm() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
-  onSignUp(){
-    this.signedUsers.push(this.signUpObj);
-    localStorage.setItem('signedUsers', JSON.stringify(this.signedUsers));
-    this.signUpObj = {
-             username: '',
-             email: '',
-             password: ''
+
+  logOut() {
+    sessionStorage.clear();
+    this.router.navigate(['login']);
+  }
+
+
+navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
+  onSubmit() {
+
+     if (this.loginForm.valid) {
+         const { email, password } = this.loginForm.value;
+         const savedUser = this.userService.getUser();
+
+         if (savedUser && savedUser.email === email && savedUser.password === password){
+           this.router.navigate(['']);
+           alert('Logged in successfully');
            }
-  }
 
+   else alert('Incorrect email or password. Please try again!');
+ }
+    else alert('Please fill all required fields. ');
 
-//   email: string = '';
-//   password: string = '';
-//   invalidEmailFormat: boolean = false;
-//
-//   login() {
-//     // Add logic to check user credentials (hardcoded for now)
-//     if (this.email.includes('@') && this.email.includes('.')) {
-//       // Successful login
-//       this.router.navigate(['/catalog']);
-//     } else {
-//       // Invalid email format
-//       this.invalidEmailFormat = true;
-//     }
-//   }
+ }
 }
